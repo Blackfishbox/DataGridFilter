@@ -1,0 +1,58 @@
+﻿<Window x:Class="MahAppsTestApplication.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:FilterDataGrid;assembly=FilterDataGridNetCore"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <control:FilterDataGrid AutoGenerateColumns="False"
+                            FilterLanguage="German"
+                            ItemsSource="{Binding DocumentsView}"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            CanUserSortColumns="True">
+            <DataGrid.Columns>
+                <control:DataGridTextColumn IsColumnFiltered="True"
+                                    Binding="{Binding Medium}"
+                                    FieldName="Medium"
+                                    CanUserSort="True"
+                                    SortMemberPath="Medium"
+                                    Header="Medium"/>
+            </DataGrid.Columns>
+        </control:FilterDataGrid>
+
+        <control:FilterDataGrid Grid.Column="1" AutoGenerateColumns="False"
+                            FilterLanguage="German"
+                            ItemsSource="{Binding DocumentsView}"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            CanUserSortColumns="True">
+            <DataGrid.ColumnHeaderStyle>
+                <Style BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}" 
+                       TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="mah:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <control:DataGridTextColumn IsColumnFiltered="True"
+                                    Binding="{Binding Medium}"
+                                    FieldName="Medium"
+                                    CanUserSort="True"
+                                    SortMemberPath="Medium"
+                                    Header="Medium"/>
+            </DataGrid.Columns>
+        </control:FilterDataGrid>
+    </Grid>
+    
+</Window>
